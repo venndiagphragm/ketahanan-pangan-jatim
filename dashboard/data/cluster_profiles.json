@@ -1,0 +1,32 @@
+{
+  "1": {
+    "count": 28,
+    "avg_ikp": 71.1,
+    "avg_ipm": 75.08,
+    "avg_kemiskinan": 9.54,
+    "avg_tpt": 4.04,
+    "avg_gizi_kurang": 44.43,
+    "avg_produksi_padi": 276168.62,
+    "avg_kepadatan": 1532.61
+  },
+  "2": {
+    "count": 117,
+    "avg_ikp": 78.44,
+    "avg_ipm": 72.16,
+    "avg_kemiskinan": 12.21,
+    "avg_tpt": 4.27,
+    "avg_gizi_kurang": 4.8,
+    "avg_produksi_padi": 336105.17,
+    "avg_kepadatan": 790.33
+  },
+  "3": {
+    "count": 45,
+    "avg_ikp": 77.04,
+    "avg_ipm": 80.94,
+    "avg_kemiskinan": 5.56,
+    "avg_tpt": 6.04,
+    "avg_gizi_kurang": 6.08,
+    "avg_produksi_padi": 37300.81,
+    "avg_kepadatan": 5323.22
+  }
+}

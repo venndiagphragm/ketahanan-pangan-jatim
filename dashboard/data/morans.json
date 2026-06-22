@@ -1,0 +1,37 @@
+{
+  "2021": {
+    "morans_i": 0.4962,
+    "p_value": 0.001,
+    "z_score": 4.5011,
+    "significant": true,
+    "E_I": -0.027
+  },
+  "2022": {
+    "morans_i": 0.5333,
+    "p_value": 0.001,
+    "z_score": 4.82,
+    "significant": true,
+    "E_I": -0.027
+  },
+  "2023": {
+    "morans_i": 0.4913,
+    "p_value": 0.001,
+    "z_score": 4.459,
+    "significant": true,
+    "E_I": -0.027
+  },
+  "2024": {
+    "morans_i": 0.2958,
+    "p_value": 0.01,
+    "z_score": 2.7769,
+    "significant": true,
+    "E_I": -0.027
+  },
+  "2025": {
+    "morans_i": 0.3976,
+    "p_value": 0.001,
+    "z_score": 3.6531,
+    "significant": true,
+    "E_I": -0.027
+  }
+}

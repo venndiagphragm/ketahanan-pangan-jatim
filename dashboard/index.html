@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Ketahanan Pangan Jawa Timur 2021-2025</title>
+  <meta name="description" content="Dashboard analisis spasial dan klasterisasi ketahanan pangan 38 Kabupaten/Kota di Jawa Timur menggunakan K-Means Clustering, Moran's I, dan LISA.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="css/leaflet.css">
+  
+  <!-- Chart.js -->
+  <script src="js/chart.umd.min.js"></script>
+  
+  <!-- Leaflet JS -->
+  <script src="js/leaflet.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar transparent" id="navbar">
+    <div class="navbar-logo">
+      <div class="logo-icon">KP</div>
+      <span>Ketahanan Pangan Jatim</span>
+    </div>
+    <ul class="navbar-links" id="navLinks">
+      <li><a href="#landing" class="active" data-page="landing">Beranda</a></li>
+      <li><a href="#overview" data-page="overview">Overview</a></li>
+      <li><a href="#peta-ikp" data-page="peta-ikp">Peta IKP</a></li>
+      <li><a href="#peta-cluster" data-page="peta-cluster">Peta Cluster</a></li>
+      <li><a href="#profil" data-page="profil">Profil Wilayah</a></li>
+    </ul>
+    <span class="navbar-badge">Kelompok A</span>
+  </nav>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+
+  <!-- ==================== LANDING PAGE ==================== -->
+  <div class="page active" id="page-landing" data-page="landing">
+    <!-- Hero -->
+    <section class="hero" id="hero-section">
+      <div class="hero-bg">
+        <img src="img/hero-bromo.png" alt="Gunung Bromo, Jawa Timur" loading="eager">
+      </div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title fade-in stagger-1">
+          ANALISIS SPASIAL &amp;<br>
+          KLASTERISASI <span class="highlight">KETAHANAN PANGAN</span>
+        </h1>
+        <p class="hero-subtitle fade-in stagger-2">
+          Mengungkap pola spasial ketahanan pangan 38 Kabupaten/Kota 
+          di Jawa Timur melalui K-Means Clustering, Moran's I, 
+          dan analisis LISA berbasis data BPS.
+        </p>
+        <p class="hero-subtitle fade-in stagger-3" style="font-size:0.9rem; color: var(--color-text-muted);">
+          Jawa Timur &bull; 2021&ndash;2025
+        </p>
+      </div>
+      <div class="hero-scroll-hint fade-in stagger-4">
+        <span>Scroll untuk Menjelajahi</span>
+        <span class="arrow">&darr;</span>
+      </div>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="metrics-section" id="metrics-section">
+      <h2 class="section-title fade-in">Ringkasan Data</h2>
+      <div class="metrics-grid">
+        <div class="metric-card fade-in stagger-1" id="metric-wilayah">
+          <div class="metric-value" data-target="38" data-type="int">0</div>
+          <div class="metric-label">Kabupaten/Kota</div>
+          <div class="metric-detail">Total wilayah analisis</div>
+        </div>
+        <div class="metric-card fade-in stagger-2" id="metric-ikp">
+          <div class="metric-value" data-target="75.92" data-type="float">0</div>
+          <div class="metric-label">Rata-rata IKP</div>
+          <div class="metric-detail">Indeks Ketahanan Pangan</div>
+        </div>
+        <div class="metric-card fade-in stagger-3" id="metric-ipm">
+          <div class="metric-value" data-target="75.10" data-type="float">0</div>
+          <div class="metric-label">Rata-rata IPM</div>
+          <div class="metric-detail">Indeks Pembangunan Manusia</div>
+        </div>
+        <div class="metric-card fade-in stagger-4" id="metric-kemiskinan">
+          <div class="metric-value" data-target="11.80" data-type="float" data-suffix="%">0</div>
+          <div class="metric-label">Rata-rata Kemiskinan</div>
+          <div class="metric-detail">Persentase penduduk miskin</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta-section">
+      <div class="bg-image">
+        <img src="img/sawah-jatim.png" alt="Sawah padi Jawa Timur" loading="lazy">
+      </div>
+      <div class="overlay"></div>
+      <div class="cta-content">
+        <h2 class="cta-title fade-in">MULAI MENJELAJAHI DATA</h2>
+        <div class="cta-buttons fade-in stagger-2">
+          <a href="#overview" class="btn btn-primary" data-navigate="overview">Jelajahi Dashboard &rarr;</a>
+          <a href="#peta-ikp" class="btn btn-outline" data-navigate="peta-ikp">Lihat Peta IKP</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guide Cards -->
+    <section class="guide-section" id="guide-section">
+      <h2 class="section-title fade-in">Struktur Dashboard</h2>
+      <div class="guide-grid">
+        <div class="guide-card fade-in stagger-1" data-navigate="overview">
+          <div class="guide-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          </div>
+          <h3>Overview Jawa Timur</h3>
+          <p>Statistik agregat, distribusi IKP per tahun, dan komposisi klaster di seluruh wilayah.</p>
+          <span class="card-link">&rarr; Lihat Overview</span>
+        </div>
+        <div class="guide-card fade-in stagger-2" data-navigate="peta-ikp">
+          <div class="guide-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+          </div>
+          <h3>Peta Ketahanan Pangan</h3>
+          <p>Choropleth IKP interaktif dengan slider tahun dan hasil uji autokorelasi spasial Moran's I.</p>
+          <span class="card-link">&rarr; Lihat Peta IKP</span>
+        </div>
+        <div class="guide-card fade-in stagger-3" data-navigate="peta-cluster">
+          <div class="guide-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <h3>Peta Klasterisasi</h3>
+          <p>Persebaran 3 klaster K-Means dengan analisis LISA untuk identifikasi hotspot lokal.</p>
+          <span class="card-link">&rarr; Lihat Peta Cluster</span>
+        </div>
+        <div class="guide-card fade-in stagger-4" data-navigate="profil">
+          <div class="guide-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <h3>Profil Kabupaten/Kota</h3>
+          <p>Eksplorasi detail per wilayah dengan filter tahun dan perbandingan antar kabupaten/kota.</p>
+          <span class="card-link">&rarr; Lihat Profil</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section" id="about-section">
+      <div class="about-content">
+        <div class="about-text fade-in">
+          <h2>Tentang Proyek Ini</h2>
+          <p>
+            Proyek ini merupakan tugas akhir mata kuliah Statistika Ofisial yang 
+            menganalisis dimensi ketahanan pangan di Jawa Timur secara komprehensif. 
+            Dengan mengintegrasikan data pertanian, sosial-ekonomi, dan kesehatan dari 
+            BPS selama 5 tahun, kami membangun model klasterisasi dan analisis spasial 
+            untuk mengidentifikasi pola distribusi ketahanan pangan antar wilayah.
+          </p>
+          <div class="about-meta">
+            <p><strong>Variabel:</strong> IKP, IPM, Kemiskinan, TPT, Kepadatan Penduduk, Produksi Padi, Produktivitas Padi, Luas Panen, Gizi Kurang</p>
+            <p><strong>Metode:</strong> PCA &rarr; K-Means (k=3) &rarr; Moran's I &rarr; LISA</p>
+            <p><strong>Data:</strong> BPS Jawa Timur 2021&ndash;2025 (190 observasi)</p>
+          </div>
+        </div>
+        <div class="about-image fade-in stagger-2">
+          <img src="img/about-illustration.png" alt="Ilustrasi Data Ketahanan Pangan" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p><a href="#">Kelompok A</a> &mdash; Statistika Ofisial 2025 &bull; Universitas</p>
+    </footer>
+  </div>
+
+  <!-- ==================== OVERVIEW PAGE ==================== -->
+  <div class="page" id="page-overview" data-page="overview">
+    <div class="page-header">
+      <h1>Overview Jawa Timur</h1>
+      <p>Statistik agregat, distribusi IKP, dan komposisi klaster seluruh wilayah.</p>
+    </div>
+
+    <div class="filter-bar" id="filter-bar-overview">
+      <label>Tahun:</label>
+      <select class="filter-select" id="year-filter-overview">
+        <option value="all">Semua Tahun</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+      </select>
+    </div>
+
+    <div class="dashboard-content">
+      <!-- Summary Metrics -->
+      <div class="metrics-grid" id="overview-metrics" style="margin-bottom: var(--space-xl);">
+        <div class="metric-card">
+          <div class="metric-value" id="ov-total">38</div>
+          <div class="metric-label">Kabupaten/Kota</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="ov-ikp">-</div>
+          <div class="metric-label">Rata-rata IKP</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="ov-ipm">-</div>
+          <div class="metric-label">Rata-rata IPM</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-value" id="ov-kemiskinan">-</div>
+          <div class="metric-label">Rata-rata Kemiskinan</div>
+        </div>
+      </div>
+
+      <!-- Charts Row 1 -->
+      <div class="charts-row">
+        <div class="chart-container">
+          <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span> Tren IKP per Tahun</div>
+          <div class="chart-wrapper"><canvas id="chart-trend-ikp"></canvas></div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></span> Distribusi IKP</div>
+          <div class="chart-wrapper"><canvas id="chart-dist-ikp"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Charts Row 2 -->
+      <div class="charts-row">
+        <div class="chart-container">
+          <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg></span> Komposisi Cluster</div>
+          <div class="chart-wrapper"><canvas id="chart-cluster-donut"></canvas></div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="18" cy="12" r="1"></circle><circle cx="6" cy="12" r="1"></circle><circle cx="12" cy="18" r="1"></circle><circle cx="12" cy="6" r="1"></circle></svg></span> Scatter Plot PC1 vs PC2</div>
+          <div class="chart-wrapper"><canvas id="chart-pca-scatter"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Bar Chart IKP -->
+      <div class="charts-row">
+        <div class="chart-container full-width">
+          <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg></span> IKP per Wilayah</div>
+          <div class="chart-wrapper scrollable" style="min-height: 600px;"><canvas id="chart-bar-ikp"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Cluster Table -->
+      <div class="cluster-table-container">
+        <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></span> Ringkasan Profil Cluster</div>
+        <table class="data-table" id="cluster-summary-table">
+          <thead>
+            <tr>
+              <th>Cluster</th>
+              <th>IKP</th>
+              <th>IPM</th>
+              <th>Kemiskinan (%)</th>
+              <th>TPT (%)</th>
+              <th>Gizi Kurang (%)</th>
+              <th>Produksi Padi (ton)</th>
+              <th>Karakteristik</th>
+            </tr>
+          </thead>
+          <tbody id="cluster-table-body">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PETA IKP PAGE ==================== -->
+  <div class="page" id="page-peta-ikp" data-page="peta-ikp">
+    <div class="map-layout">
+      <div class="map-container">
+        <div id="map-ikp"></div>
+        <div class="year-slider-container">
+          <button class="btn-autoplay" id="autoplay-ikp" title="Auto-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+          <input type="range" class="year-slider" id="year-slider-ikp" min="2021" max="2025" value="2023" step="1">
+          <span class="year-label" id="year-label-ikp">2023</span>
+        </div>
+      </div>
+      <div class="map-panel" id="panel-morans">
+        <div class="panel-section">
+          <div class="panel-section-title">Uji Moran's I &mdash; Autokorelasi Spasial IKP</div>
+          <div class="hypothesis-box">
+            <p><span class="label">H0:</span> <span class="value">Tidak terdapat autokorelasi spasial (pola distribusi IKP bersifat acak)</span></p>
+            <p style="margin-top: 8px;"><span class="label">H1:</span> <span class="value">Terdapat autokorelasi spasial (wilayah berdekatan memiliki nilai IKP serupa)</span></p>
+            <p style="margin-top: 8px;"><span class="label">Bobot Spasial:</span> <span class="value">Queen Contiguity</span></p>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="panel-section-title">Hasil Uji</div>
+          <div class="result-box" id="morans-results">
+            <div class="result-row">
+              <span class="label">Moran's I</span>
+              <span class="value" id="morans-i-val">-</span>
+            </div>
+            <div class="result-row">
+              <span class="label">p-value</span>
+              <span class="value" id="morans-p-val">-</span>
+            </div>
+            <div class="result-row">
+              <span class="label">z-score</span>
+              <span class="value" id="morans-z-val">-</span>
+            </div>
+            <div id="morans-badge-container" style="margin-top:16px;"></div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="panel-section-title">Kesimpulan</div>
+          <div class="conclusion-text" id="morans-conclusion">
+            Pilih tahun pada slider peta untuk melihat hasil uji Moran's I.
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="panel-section-title">Moran Scatter Plot</div>
+          <div class="chart-wrapper" style="min-height:250px;">
+            <canvas id="chart-moran-scatter"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PETA CLUSTER PAGE ==================== -->
+  <div class="page" id="page-peta-cluster" data-page="peta-cluster">
+    <div class="cluster-layout">
+      <div class="cluster-map-section">
+        <div id="map-cluster" style="width:100%;height:100%;"></div>
+        <div class="layer-toggle" id="layer-toggle">
+          <button class="layer-btn active" data-layer="cluster">Cluster</button>
+          <button class="layer-btn" data-layer="lisa">LISA</button>
+        </div>
+        <div class="year-slider-container">
+          <button class="btn-autoplay" id="autoplay-cluster" title="Auto-play"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></button>
+          <input type="range" class="year-slider" id="year-slider-cluster" min="2021" max="2025" value="2023" step="1">
+          <span class="year-label" id="year-label-cluster">2023</span>
+        </div>
+      </div>
+
+      <div class="cluster-panels">
+        <!-- Cluster Profile Panel -->
+        <div class="cluster-panel">
+          <div class="panel-section-title">Profil Cluster</div>
+          <div class="tab-nav">
+            <button class="tab-btn active" data-cluster="1" data-tab="cluster-1">Cluster 1</button>
+            <button class="tab-btn" data-cluster="2" data-tab="cluster-2">Cluster 2</button>
+            <button class="tab-btn" data-cluster="3" data-tab="cluster-3">Cluster 3</button>
+          </div>
+          
+          <div class="tab-content active" id="tab-cluster-1">
+            <div class="chart-wrapper" style="min-height:250px;"><canvas id="chart-radar-1"></canvas></div>
+            <div class="cluster-interpretation">
+              Wilayah dengan tekanan sosial-ekonomi tinggi: kemiskinan di atas rata-rata, IPM rendah, prevalensi gizi kurang elevated. Memerlukan intervensi kebijakan prioritas.
+            </div>
+            <div class="cluster-regions-list" id="cluster-1-regions"></div>
+          </div>
+          <div class="tab-content" id="tab-cluster-2">
+            <div class="chart-wrapper" style="min-height:250px;"><canvas id="chart-radar-2"></canvas></div>
+            <div class="cluster-interpretation">
+              Wilayah dengan karakteristik tipikal Jawa Timur: nilai variabel mendekati rata-rata provinsi, heterogenitas sedang.
+            </div>
+            <div class="cluster-regions-list" id="cluster-2-regions"></div>
+          </div>
+          <div class="tab-content" id="tab-cluster-3">
+            <div class="chart-wrapper" style="min-height:250px;"><canvas id="chart-radar-3"></canvas></div>
+            <div class="cluster-interpretation">
+              Wilayah perkotaan maju: IPM tertinggi, kepadatan penduduk tinggi, kemiskinan terendah. Namun ketergantungan pada impor pangan perlu diperhatikan.
+            </div>
+            <div class="cluster-regions-list" id="cluster-3-regions"></div>
+          </div>
+        </div>
+
+        <!-- LISA Panel -->
+        <div class="cluster-panel" id="lisa-panel">
+          <div class="panel-section-title">Hasil LISA (Local Indicators of Spatial Association)</div>
+          <div id="lisa-content">
+            <div class="lisa-notice">Memuat data LISA...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PROFIL PAGE ==================== -->
+  <div class="page" id="page-profil" data-page="profil">
+    <div class="profile-layout">
+      <div class="profile-filter-bar" id="profile-filter-bar">
+        <label>Pilih Wilayah:</label>
+        <select class="filter-select" id="profile-region-select" style="width:250px;">
+          <option value="">-- Pilih Wilayah --</option>
+        </select>
+        <label>Tahun:</label>
+        <select class="filter-select" id="profile-year-select">
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023" selected>2023</option>
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+        </select>
+        <label>Bandingkan dengan:</label>
+        <select class="filter-select" id="profile-compare-select" style="width:250px;">
+          <option value="">-- Tidak ada --</option>
+        </select>
+      </div>
+
+      <div class="profile-grid" id="profile-content">
+        <!-- Profile Detail (Left) -->
+        <div class="profile-card" id="profile-detail">
+          <div class="profile-header">
+            <h2 id="profile-name">Pilih Wilayah</h2>
+            <div class="subtitle" id="profile-subtitle">Gunakan dropdown di atas untuk memilih wilayah.</div>
+          </div>
+          <div id="profile-ikp-box"></div>
+          <div id="profile-table-container"></div>
+          <div style="margin-top: var(--space-lg);">
+            <div class="chart-title"><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg></span> Tren IKP 2021&ndash;2025</div>
+            <div class="chart-wrapper" style="min-height:200px;"><canvas id="chart-profile-trend"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Comparison (Right) -->
+        <div class="profile-card" id="profile-compare">
+          <div class="profile-header">
+            <h2 id="compare-name">Perbandingan</h2>
+            <div class="subtitle" id="compare-subtitle">Pilih wilayah pembanding untuk melihat tabel komparasi.</div>
+          </div>
+          <div id="compare-table-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>

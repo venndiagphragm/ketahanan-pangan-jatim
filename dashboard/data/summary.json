@@ -1,0 +1,87 @@
+{
+  "2021": {
+    "total_wilayah": 38,
+    "avg_ikp": 79.7,
+    "avg_ipm": 73.3,
+    "avg_kemiskinan": 11.32,
+    "avg_tpt": 5.52,
+    "min_ikp": 68.6,
+    "max_ikp": 88.25,
+    "min_ipm": 64.86,
+    "max_ipm": 82.94,
+    "cluster_distribution": {
+      "2": 28,
+      "3": 10
+    }
+  },
+  "2022": {
+    "total_wilayah": 38,
+    "avg_ikp": 79.85,
+    "avg_ipm": 74.0,
+    "avg_kemiskinan": 10.33,
+    "avg_tpt": 5.27,
+    "min_ikp": 70.59,
+    "max_ikp": 86.81,
+    "min_ipm": 65.44,
+    "max_ipm": 83.38,
+    "cluster_distribution": {
+      "2": 27,
+      "3": 11
+    }
+  },
+  "2023": {
+    "total_wilayah": 38,
+    "avg_ikp": 82.46,
+    "avg_ipm": 74.68,
+    "avg_kemiskinan": 10.29,
+    "avg_tpt": 4.66,
+    "min_ikp": 73.23,
+    "max_ikp": 92.49,
+    "min_ipm": 66.19,
+    "max_ipm": 84.0,
+    "cluster_distribution": {
+      "2": 28,
+      "3": 10
+    }
+  },
+  "2024": {
+    "total_wilayah": 38,
+    "avg_ikp": 70.65,
+    "avg_ipm": 75.31,
+    "avg_kemiskinan": 9.78,
+    "avg_tpt": 4.04,
+    "min_ikp": 62.87,
+    "max_ikp": 83.02,
+    "min_ipm": 66.72,
+    "max_ipm": 84.69,
+    "cluster_distribution": {
+      "2": 6,
+      "1": 28,
+      "3": 4
+    }
+  },
+  "2025": {
+    "total_wilayah": 38,
+    "avg_ikp": 72.45,
+    "avg_ipm": 76.06,
+    "avg_kemiskinan": 9.48,
+    "avg_tpt": 3.78,
+    "min_ikp": 61.95,
+    "max_ikp": 82.14,
+    "min_ipm": 67.23,
+    "max_ipm": 85.65,
+    "cluster_distribution": {
+      "2": 28,
+      "3": 10
+    }
+  },
+  "all": {
+    "total_wilayah": 38,
+    "total_observations": 190,
+    "avg_ikp": 77.02,
+    "avg_ipm": 74.67,
+    "avg_kemiskinan": 10.24,
+    "min_ikp": 61.95,
+    "max_ikp": 92.49
+  }
+}

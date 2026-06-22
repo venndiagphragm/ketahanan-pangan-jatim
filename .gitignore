@@ -1,0 +1,8 @@
+node_modules/
+__pycache__/
+.env
+.DS_Store
+gadm41_IDN_shp/
+dashboard/test.js
+dashboard/screenshot*.js
+dashboard/*.png
