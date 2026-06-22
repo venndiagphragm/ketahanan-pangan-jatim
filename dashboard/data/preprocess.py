@@ -137,18 +137,15 @@ def generate_regions(records):
     return regions
 
 def generate_cluster_profiles(records):
-    """Generate cluster profile data."""
-    clusters = {1: [], 2: [], 3: []}
-    
-    for r in records:
-        c = parse_int(r.get("Cluster", "0"))
-        if c in clusters:
-            clusters[c].append(r)
+    """Generate cluster profile data by year and overall."""
+    years = sorted(set(r.get("Tahun", "") for r in records if r.get("Tahun", "")))
     
     profiles = {}
-    for c_id, c_records in clusters.items():
+    
+    # Helper to calculate average for a set of records
+    def calc_profile(c_records):
         n = len(c_records) if c_records else 1
-        profiles[str(c_id)] = {
+        return {
             "count": len(c_records),
             "avg_ikp": round(sum(parse_float(r.get("IKP_offstat")) for r in c_records) / n, 2),
             "avg_ipm": round(sum(parse_float(r.get("IPM")) for r in c_records) / n, 2),
@@ -158,7 +155,31 @@ def generate_cluster_profiles(records):
             "avg_produksi_padi": round(sum(parse_float(r.get("Rekap Produksi Padi (ton) (Ton)_offstat")) for r in c_records) / n, 2),
             "avg_kepadatan": round(sum(parse_float(r.get("Kepadatan_Penduduk")) for r in c_records) / n, 2),
         }
+
+    # Yearly profiles
+    for year in years:
+        year_records = [r for r in records if r.get("Tahun", "") == year]
+        clusters = {1: [], 2: [], 3: []}
+        for r in year_records:
+            c = parse_int(r.get("Cluster", "0"))
+            if c in clusters:
+                clusters[c].append(r)
+        
+        profiles[year] = {}
+        for c_id, c_records in clusters.items():
+            profiles[year][str(c_id)] = calc_profile(c_records)
     
+    # Overall profiles
+    clusters_all = {1: [], 2: [], 3: []}
+    for r in records:
+        c = parse_int(r.get("Cluster", "0"))
+        if c in clusters_all:
+            clusters_all[c].append(r)
+            
+    profiles["all"] = {}
+    for c_id, c_records in clusters_all.items():
+        profiles["all"][str(c_id)] = calc_profile(c_records)
+        
     return profiles
 
 def generate_morans_and_lisa(records):

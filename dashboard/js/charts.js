@@ -47,7 +47,7 @@ function updateOverview(selectedYear) {
   renderClusterDonut(selectedYear);
   renderPCAScatter(selectedYear);
   renderBarChart(selectedYear);
-  renderClusterTable();
+  renderClusterTable(selectedYear);
 }
 
 function updateOverviewMetrics(year) {
@@ -437,11 +437,14 @@ function renderBarChart(year) {
   });
 }
 
-function renderClusterTable() {
+function renderClusterTable(year) {
   const tbody = document.getElementById('cluster-table-body');
   if (!tbody) return;
   
-  const profiles = AppState.data.clusterProfiles;
+  const allProfiles = AppState.data.clusterProfiles;
+  if (!allProfiles) return;
+  
+  const profiles = year === 'all' ? allProfiles['all'] : allProfiles[year];
   if (!profiles) return;
   
   const labels = {

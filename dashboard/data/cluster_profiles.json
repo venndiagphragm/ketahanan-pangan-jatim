@@ -1,32 +1,194 @@
 {
-  "1": {
-    "count": 28,
-    "avg_ikp": 71.1,
-    "avg_ipm": 75.08,
-    "avg_kemiskinan": 9.54,
-    "avg_tpt": 4.04,
-    "avg_gizi_kurang": 44.43,
-    "avg_produksi_padi": 276168.62,
-    "avg_kepadatan": 1532.61
+  "2021": {
+    "1": {
+      "count": 0,
+      "avg_ikp": 0.0,
+      "avg_ipm": 0.0,
+      "avg_kemiskinan": 0.0,
+      "avg_tpt": 0.0,
+      "avg_gizi_kurang": 0.0,
+      "avg_produksi_padi": 0.0,
+      "avg_kepadatan": 0.0
+    },
+    "2": {
+      "count": 28,
+      "avg_ikp": 80.67,
+      "avg_ipm": 71.05,
+      "avg_kemiskinan": 13.18,
+      "avg_tpt": 4.72,
+      "avg_gizi_kurang": 5.52,
+      "avg_produksi_padi": 339632.66,
+      "avg_kepadatan": 814.64
+    },
+    "3": {
+      "count": 10,
+      "avg_ikp": 77.01,
+      "avg_ipm": 79.6,
+      "avg_kemiskinan": 6.13,
+      "avg_tpt": 7.75,
+      "avg_gizi_kurang": 5.11,
+      "avg_produksi_padi": 27987.32,
+      "avg_kepadatan": 5065.2
+    }
   },
-  "2": {
-    "count": 117,
-    "avg_ikp": 78.44,
-    "avg_ipm": 72.16,
-    "avg_kemiskinan": 12.21,
-    "avg_tpt": 4.27,
-    "avg_gizi_kurang": 4.8,
-    "avg_produksi_padi": 336105.17,
-    "avg_kepadatan": 790.33
+  "2022": {
+    "1": {
+      "count": 0,
+      "avg_ikp": 0.0,
+      "avg_ipm": 0.0,
+      "avg_kemiskinan": 0.0,
+      "avg_tpt": 0.0,
+      "avg_gizi_kurang": 0.0,
+      "avg_produksi_padi": 0.0,
+      "avg_kepadatan": 0.0
+    },
+    "2": {
+      "count": 27,
+      "avg_ikp": 80.3,
+      "avg_ipm": 71.67,
+      "avg_kemiskinan": 12.04,
+      "avg_tpt": 4.82,
+      "avg_gizi_kurang": 1.14,
+      "avg_produksi_padi": 328053.94,
+      "avg_kepadatan": 773.63
+    },
+    "3": {
+      "count": 11,
+      "avg_ikp": 78.76,
+      "avg_ipm": 79.73,
+      "avg_kemiskinan": 6.13,
+      "avg_tpt": 6.39,
+      "avg_gizi_kurang": 3.91,
+      "avg_produksi_padi": 60823.57,
+      "avg_kepadatan": 5255.82
+    }
   },
-  "3": {
-    "count": 45,
-    "avg_ikp": 77.04,
-    "avg_ipm": 80.94,
-    "avg_kemiskinan": 5.56,
-    "avg_tpt": 6.04,
-    "avg_gizi_kurang": 6.08,
-    "avg_produksi_padi": 37300.81,
-    "avg_kepadatan": 5323.22
+  "2023": {
+    "1": {
+      "count": 0,
+      "avg_ikp": 0.0,
+      "avg_ipm": 0.0,
+      "avg_kemiskinan": 0.0,
+      "avg_tpt": 0.0,
+      "avg_gizi_kurang": 0.0,
+      "avg_produksi_padi": 0.0,
+      "avg_kepadatan": 0.0
+    },
+    "2": {
+      "count": 28,
+      "avg_ikp": 81.9,
+      "avg_ipm": 72.41,
+      "avg_kemiskinan": 12.0,
+      "avg_tpt": 4.32,
+      "avg_gizi_kurang": 4.97,
+      "avg_produksi_padi": 337380.82,
+      "avg_kepadatan": 776.36
+    },
+    "3": {
+      "count": 10,
+      "avg_ikp": 84.05,
+      "avg_ipm": 81.05,
+      "avg_kemiskinan": 5.53,
+      "avg_tpt": 5.62,
+      "avg_gizi_kurang": 4.7,
+      "avg_produksi_padi": 26399.84,
+      "avg_kepadatan": 5190.3
+    }
+  },
+  "2024": {
+    "1": {
+      "count": 28,
+      "avg_ikp": 71.1,
+      "avg_ipm": 75.08,
+      "avg_kemiskinan": 9.54,
+      "avg_tpt": 4.04,
+      "avg_gizi_kurang": 44.43,
+      "avg_produksi_padi": 276168.62,
+      "avg_kepadatan": 1532.61
+    },
+    "2": {
+      "count": 6,
+      "avg_ikp": 70.12,
+      "avg_ipm": 70.94,
+      "avg_kemiskinan": 14.43,
+      "avg_tpt": 3.18,
+      "avg_gizi_kurang": 15.28,
+      "avg_produksi_padi": 217906.76,
+      "avg_kepadatan": 833.33
+    },
+    "3": {
+      "count": 4,
+      "avg_ikp": 68.29,
+      "avg_ipm": 83.45,
+      "avg_kemiskinan": 4.49,
+      "avg_tpt": 5.31,
+      "avg_gizi_kurang": 20.19,
+      "avg_produksi_padi": 57568.35,
+      "avg_kepadatan": 6587.5
+    }
+  },
+  "2025": {
+    "1": {
+      "count": 0,
+      "avg_ikp": 0.0,
+      "avg_ipm": 0.0,
+      "avg_kemiskinan": 0.0,
+      "avg_tpt": 0.0,
+      "avg_gizi_kurang": 0.0,
+      "avg_produksi_padi": 0.0,
+      "avg_kepadatan": 0.0
+    },
+    "2": {
+      "count": 28,
+      "avg_ikp": 72.73,
+      "avg_ipm": 73.76,
+      "avg_kemiskinan": 11.15,
+      "avg_tpt": 3.48,
+      "avg_gizi_kurang": 5.19,
+      "avg_produksi_padi": 364393.96,
+      "avg_kepadatan": 786.89
+    },
+    "3": {
+      "count": 10,
+      "avg_ikp": 71.66,
+      "avg_ipm": 82.51,
+      "avg_kemiskinan": 4.81,
+      "avg_tpt": 4.63,
+      "avg_gizi_kurang": 5.18,
+      "avg_produksi_padi": 23533.2,
+      "avg_kepadatan": 5282.6
+    }
+  },
+  "all": {
+    "1": {
+      "count": 28,
+      "avg_ikp": 71.1,
+      "avg_ipm": 75.08,
+      "avg_kemiskinan": 9.54,
+      "avg_tpt": 4.04,
+      "avg_gizi_kurang": 44.43,
+      "avg_produksi_padi": 276168.62,
+      "avg_kepadatan": 1532.61
+    },
+    "2": {
+      "count": 117,
+      "avg_ikp": 78.44,
+      "avg_ipm": 72.16,
+      "avg_kemiskinan": 12.21,
+      "avg_tpt": 4.27,
+      "avg_gizi_kurang": 4.8,
+      "avg_produksi_padi": 336105.17,
+      "avg_kepadatan": 790.33
+    },
+    "3": {
+      "count": 45,
+      "avg_ikp": 77.04,
+      "avg_ipm": 80.94,
+      "avg_kemiskinan": 5.56,
+      "avg_tpt": 6.04,
+      "avg_gizi_kurang": 6.08,
+      "avg_produksi_padi": 37300.81,
+      "avg_kepadatan": 5323.22
+    }
   }
 }
