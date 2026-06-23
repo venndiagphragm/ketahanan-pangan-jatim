@@ -177,6 +177,12 @@ h4 { font-size: 1.125rem; }
   font-size: 0.9rem;
 }
 
+.navbar-logo .logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
 .navbar-links {
   display: flex;
   gap: var(--space-lg);
