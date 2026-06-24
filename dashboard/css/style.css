@@ -1058,8 +1058,18 @@ h4 { font-size: 1.125rem; }
 .tab-btn[data-cluster="2"].active { color: var(--cluster-2); }
 .tab-btn[data-cluster="3"].active { color: var(--cluster-3); }
 
-.tab-content { display: none; }
-.tab-content.active { display: block; }
+.tab-content { 
+  display: none; 
+  animation: tabFadeIn var(--duration-slow) var(--ease-default);
+}
+.tab-content.active { 
+  display: block; 
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .cluster-interpretation {
   font-size: 0.85rem;
